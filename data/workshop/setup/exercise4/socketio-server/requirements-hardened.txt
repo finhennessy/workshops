@@ -1,3 +1,0 @@
-python-socketio
-aiohttp
-redis
