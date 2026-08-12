@@ -23,7 +23,7 @@ OpenShift ships with a fully managed Prometheus stack - no installation required
 
 View the Prometheus pods that are already running:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n openshift-monitoring -l app.kubernetes.io/name=prometheus
 ----
@@ -42,12 +42,12 @@ TIP: Try other queries like `node_memory_MemAvailable_bytes` or `kubelet_running
 
 For quick CLI snapshots, you can also use:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc adm top nodes
 ----
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc adm top pods -A --sort-by=cpu | head -15
 ----
@@ -66,7 +66,7 @@ image::observe-dashboards-list.png[Observe Dashboards showing Kubernetes Compute
 
 OpenShift can also scrape metrics from your own applications. User workload monitoring is not enabled by default - it has been pre-enabled on this workshop cluster. Verify it's running:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n openshift-user-workload-monitoring
 ----
@@ -100,7 +100,7 @@ OpenShift includes Alertmanager for routing alerts to notification channels (ema
 
 Check what alerting rules exist:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get prometheusrules -A | head -15
 ----
@@ -111,7 +111,7 @@ You can also view alerts in the console under **Observe -> Alerting**.
 
 You can define your own alerts for application namespaces. Here's an example that fires when a pod has been restarting. We'll create it in the `openshift-monitoring` namespace where the built-in alerting rules live:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -136,14 +136,14 @@ EOF
 
 Verify the rule was created:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get prometheusrule ops-track-alerts -n openshift-monitoring
 ----
 
 The rule exists but nothing is triggering it. Let's fix that - deploy a pod that crash-loops so you can see the alert go from inactive to pending to firing:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc new-project alert-demo 2>/dev/null || oc project alert-demo
 cat <<EOF | oc apply -f -
@@ -173,7 +173,7 @@ Now navigate to **Alerting → Alerts** - you should see `HighPodRestartRate`. C
 image::alerts-firing.png[Alerts tab showing currently firing alerts with severity and state, link=self, window=blank]
 This is the view on-call engineers live in. You just created a rule, triggered it with a real failure, and watched it fire. Clean up the crash-looping pod:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc delete pod crashloop-test -n alert-demo --ignore-not-found
 ----
@@ -188,7 +188,7 @@ In production, that means an overnight incident goes unnoticed until someone che
 
 Deploy Mailpit - a lightweight mail server that catches emails and shows them in a web inbox. This simulates what an internal mail relay does in production:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/deploy-mailpit.sh)
 ----
@@ -197,7 +197,7 @@ bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showr
 
 Now configure Alertmanager to send emails through Mailpit. This routes warning alerts to `ops-team@example.com` and critical alerts to `oncall@example.com`:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/configure-alertmanager-email.sh)
 ----
@@ -218,7 +218,7 @@ In production, you would replace `mailpit.alert-demo.svc:1025` with your organiz
 
 Reset Alertmanager to its default configuration and clean up:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/restore-alertmanager.sh)
 ----
@@ -243,7 +243,7 @@ Each layer is managed by a separate operator, so you can upgrade or troubleshoot
 
 Three operators are needed. Each one manages a different part of the pipeline. First, create the required namespaces and operator groups:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc create namespace openshift-operators-redhat 2>/dev/null || true
 oc create namespace openshift-logging 2>/dev/null || true
@@ -287,14 +287,14 @@ image::obs-loki-installing.png[Loki Operator installing confirmation, link=self,
 
 You've seen how OperatorHub works. The remaining operators use the same process - let's script them. This will take a couple of minutes to complete:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/install-operators.sh)
 ----
 
 Verify all operators are installed:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get csv -n openshift-logging --no-headers | grep -i logging && \
 oc get csv -n openshift-operators --no-headers | grep -iE 'tempo|opentelemetry|observability'
@@ -306,7 +306,7 @@ Loki needs object storage for log data. This cluster has OpenShift Data Foundati
 
 Create an S3 bucket for log storage:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -f -
 apiVersion: objectbucket.io/v1alpha1
@@ -322,14 +322,14 @@ EOF
 
 Wait for the bucket to be provisioned:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc wait --for=jsonpath='{.status.phase}'=Bound obc/loki-bucket -n openshift-logging --timeout=60s
 ----
 
 Now extract the S3 credentials, create the CA cert ConfigMap, and deploy the LokiStack - all in one block so the variables stay in scope:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-loki-storage.sh)
 ----
@@ -340,7 +340,7 @@ The ClusterLogForwarder tells Vector (the collector) what to collect and where t
 
 Create the collector service account with the required permissions:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc create sa collector -n openshift-logging
 oc adm policy add-cluster-role-to-user logging-collector-logs-writer -z collector -n openshift-logging
@@ -351,7 +351,7 @@ oc adm policy add-cluster-role-to-user collect-infrastructure-logs -z collector 
 
 Wait for the LokiStack gateway CA bundle to be created (the ClusterLogForwarder needs it):
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Waiting for LokiStack gateway CA bundle..."
 ELAPSED=0
@@ -364,7 +364,7 @@ echo "CA bundle ready"
 
 Create the ClusterLogForwarder - this defines the pipeline:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-log-forwarding.sh)
 ----
@@ -373,7 +373,7 @@ bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showr
 
 The UIPlugin adds the **Observe -> Logs** view to the OpenShift console. Run the command below to enable it - it may take a few minutes to appear:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -f -
 apiVersion: observability.openshift.io/v1alpha1
@@ -392,7 +392,7 @@ EOF
 
 Wait for the collector pods to start before verifying the full stack:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Waiting for collector pods to start..."
 ELAPSED=0
@@ -451,7 +451,7 @@ Tempo is the backend that stores and indexes traces - similar to how Loki stores
 
 Create the namespace and deploy TempoMonolithic with multi-tenancy enabled:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc create namespace tracing-system 2>/dev/null || true
 cat <<EOF | oc apply -f -
@@ -482,7 +482,7 @@ NOTE: Multi-tenancy is required for the console Traces UI to detect the Tempo in
 
 Wait for Tempo to be ready:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Waiting for Tempo pod..."
 ELAPSED=0
@@ -497,7 +497,7 @@ oc get pods -n tracing-system -l app.kubernetes.io/component=tempo
 
 The tracing pipeline needs two sets of permissions: the collector needs write access to push traces, and users need read access to query them.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-tracing-rbac.sh)
 ----
@@ -506,7 +506,7 @@ bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showr
 
 The collector is the central receiving station for trace data. Apps send traces to the collector, and the collector forwards them to Tempo for storage. Think of it like Vector for logs - a pipeline component that sits between producers and storage.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-otel-collector.sh)
 ----
@@ -519,7 +519,7 @@ This collector:
 
 Verify the collector is running:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n tracing-system
 ----
@@ -530,7 +530,7 @@ You should see both the Tempo pod and the collector pod `Running`.
 
 Like the logging UI, the Traces view needs a UIPlugin:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -f -
 apiVersion: observability.openshift.io/v1alpha1
@@ -548,7 +548,7 @@ You may see a console notification to refresh - click **Refresh** to reload.
 
 The collector is ready but nothing is sending traces yet. Let's send a test trace to verify the full pipeline:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc run test-trace --rm -i --restart=Never \
   --image=registry.access.redhat.com/ubi9/ubi-minimal \
@@ -600,7 +600,7 @@ The collector is now ready for production use. Developers point their apps at `o
 
 Remove the observability resources you deployed. The Prometheus monitoring stack is built-in and doesn't need cleanup.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/cleanup-scripts/cleanup-observability.sh)
 ----

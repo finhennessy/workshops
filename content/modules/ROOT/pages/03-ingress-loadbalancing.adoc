@@ -17,7 +17,7 @@ The **Ingress Controller** (HAProxy by default, though other ingress controllers
 
 === View Ingress Controller Configuration
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get ingresscontroller default -n openshift-ingress-operator -o yaml | head -60
 ----
@@ -31,7 +31,7 @@ Key configuration options:
 
 === View Router Pods
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n openshift-ingress -o wide
 ----
@@ -43,7 +43,7 @@ You can also view these in the **OCP Console** at **Workloads -> Pods**. Toggle 
 image::ingress-images/ingress-router-pods.png[Router pods in the openshift-ingress namespace, link=self, window=blank]
 === Check Endpoint Publishing Strategy
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get ingresscontroller default -n openshift-ingress-operator -o jsonpath='{.status.endpointPublishingStrategy}' | jq . 2>/dev/null || oc get ingresscontroller default -n openshift-ingress-operator -o jsonpath='{.status.endpointPublishingStrategy}' | python3 -m json.tool
 ----
@@ -56,7 +56,7 @@ OpenShift **Routes** expose services externally. They're more feature-rich than 
 
 This section uses a test application. Run the following to ensure the project and app are ready:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc new-project ingress-demo 2>/dev/null || oc project ingress-demo && \
 oc get deployment test-app -n ingress-demo 2>/dev/null || \
@@ -65,14 +65,14 @@ oc new-app --name=test-app --image=registry.access.redhat.com/ubi9/httpd-24 -n i
 
 NOTE: If you see pod status streaming in the terminal, press **Ctrl+C** to get your prompt back.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc create route edge test-app --service=test-app 2>/dev/null || echo "Route already exists"
 ----
 
 Wait for the pod to be ready:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc rollout status deployment/test-app -n ingress-demo --timeout=60s
 ----
@@ -87,7 +87,7 @@ Click the route name to see the full details including TLS settings and router i
 image::ingress-images/ingress-route-details.png[test-app route details showing TLS edge termination, link=self, window=blank]
 === View the Route Configuration
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get route test-app -o yaml
 ----
@@ -102,7 +102,7 @@ Key route fields:
 
 Test with HTTPS (edge TLS):
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 curl -sk https://$(oc get route test-app -o jsonpath='{.spec.host}') | head -5
 ----
@@ -136,7 +136,7 @@ OpenShift Routes support three TLS termination types:
 
 View the TLS settings on the edge route:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get route test-app -o jsonpath='{.spec.tls}' | jq . 2>/dev/null || oc get route test-app -o jsonpath='{.spec.tls}' | python3 -m json.tool
 ----
@@ -149,7 +149,7 @@ Edge termination means:
 
 === View Routes Across Cluster
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get routes -A | head -20
 ----
@@ -171,20 +171,20 @@ By default, HTTP requests to an edge route get a generic 503 page. In production
 
 Test the current HTTP behavior:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 curl -sk -o /dev/null -w "HTTP request: %{http_code}\n" "http://$(oc get route test-app -o jsonpath='{.spec.host}')"
 ----
 
 Now enable the redirect:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc patch route test-app -n ingress-demo --type=merge \
   -p '{"spec":{"tls":{"insecureEdgeTerminationPolicy":"Redirect"}}}'
 ----
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 sleep 3
 ROUTE_HOST=$(oc get route test-app -o jsonpath='{.spec.host}')
@@ -208,20 +208,20 @@ HSTS tells browsers to always use HTTPS - even if the user types `http://`. This
 
 Check the current response headers - you should see `No HSTS header` because we haven't enabled it yet:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 curl -sk -D - "https://$(oc get route test-app -o jsonpath='{.spec.host}')" 2>&1 | grep -i strict || echo "No HSTS header"
 ----
 
 Now apply HSTS:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc annotate route test-app -n ingress-demo \
   haproxy.router.openshift.io/hsts_header="max-age=31536000;includeSubDomains" --overwrite
 ----
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 sleep 3
 curl -sk -D - "https://$(oc get route test-app -o jsonpath='{.spec.host}')" 2>&1 | grep -i strict
@@ -233,7 +233,7 @@ The `strict-transport-security` header is now in every response. Browsers that s
 
 Apply rate limiting to restrict concurrent connections:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc annotate route test-app -n ingress-demo \
   haproxy.router.openshift.io/rate-limit-connections=true \
@@ -244,7 +244,7 @@ oc annotate route test-app -n ingress-demo \
 
 The annotations are set - but do they actually work? Let's prove it. Send 20 concurrent requests:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "=== With rate limiting (max 2 concurrent) ==="
 ROUTE_HOST=$(oc get route test-app -o jsonpath='{.spec.host}')
@@ -264,7 +264,7 @@ NOTE: The exact ratio of `403` to `000` responses will vary between runs dependi
 
 Now remove rate limiting and try the same test:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc annotate route test-app -n ingress-demo \
   haproxy.router.openshift.io/rate-limit-connections- \
@@ -272,7 +272,7 @@ oc annotate route test-app -n ingress-demo \
   haproxy.router.openshift.io/rate-limit-connections.rate-http-
 ----
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "=== Without rate limiting ==="
 sleep 5
@@ -292,7 +292,7 @@ The ingress controller can be scaled by changing `spec.replicas` on the IngressC
 
 On this compact cluster, one router per node is already the maximum - scaling up would leave pods Pending (anti-affinity prevents two routers on the same node), and scaling down would drop traffic on the node that loses its router.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Current replicas: $(oc get ingresscontroller default -n openshift-ingress-operator -o jsonpath='{.spec.replicas}')"
 echo "Router pods:"
@@ -312,7 +312,7 @@ You can view ingress controller health in the console at **Administration -> Clu
 image::ingress-images/ingress-operator-conditions.png[Ingress operator conditions showing Available, Progressing, Degraded status, link=self, window=blank]
 == Cleanup & Summary
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 # Remove annotations and reset route
 oc annotate route test-app -n ingress-demo \

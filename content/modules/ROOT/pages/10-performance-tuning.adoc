@@ -27,19 +27,19 @@ A developer deployed an application requesting 2Gi of memory "just to be safe." 
 
 === Deploy the App
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc new-project performance-demo
 ----
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc apply -f https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/memory-hog.yaml
 ----
 
 Wait for it to run:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -w
 ----
@@ -48,7 +48,7 @@ Press `Ctrl+C` when the pod shows `Running`.
 
 === Check What Resources Were Requested
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get deployment memory-hog -o jsonpath='{.spec.template.spec.containers[0].resources}' | jq .
 ----
@@ -62,7 +62,7 @@ TIP: If you were logged in as a different user in a previous module, log back in
 Wait for metrics to become available (~60 seconds after pod starts). While you wait, switch to the **OCP Console** tab and navigate to **Workloads -> Pods** (project: `performance-demo`). Click the pod name and look at the **Metrics** tab - you can watch memory usage populate in real-time. CPU will be near zero since this app barely uses any.
 
 image::perf-pod-metrics.png[Pod Metrics tab showing CPU and memory usage graphs, link=self, window=blank]
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Waiting 60s for metrics to populate..."
 sleep 60
@@ -79,21 +79,21 @@ The Vertical Pod Autoscaler analyzes actual usage and recommends correct resourc
 
 Check if VPA is installed:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n openshift-vertical-pod-autoscaler
 ----
 
 If not installed:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc apply -f https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/vpa-operator.yaml
 ----
 
 Wait for the operator (~1 minute):
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Waiting for VPA operator..."
 ELAPSED=0
@@ -113,14 +113,14 @@ echo "VPA operator ready"
 
 Create a VPA resource targeting the memory-hog deployment. We're using `updateMode: "Off"` - this means VPA will **only recommend** values, it won't change your pods. In production, you'd start with `Off` to validate recommendations, then switch to `Auto` to let VPA resize pods automatically during restarts.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc apply -f https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/vpa-memory-hog.yaml
 ----
 
 Wait for VPA to analyze the pod and produce a recommendation:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Waiting for VPA recommendation..."
 ELAPSED=0
@@ -140,7 +140,7 @@ memory-hog-vpa   Off    35m   262144k   True       2m
 
 View the detailed recommendation:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get vpa memory-hog-vpa -o jsonpath='{.status.recommendation.containerRecommendations[0]}' | jq .
 ----
@@ -161,7 +161,7 @@ VPA recommends **~256Mi memory** instead of the 2Gi requested. That's based on a
 
 === Apply the Right-Sized Resources
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc patch deployment memory-hog --type=json -p='[
   {"op": "replace", "path": "/spec/template/spec/containers/0/resources/requests/memory", "value": "256Mi"},
@@ -173,7 +173,7 @@ oc patch deployment memory-hog --type=json -p='[
 
 === Verify the Savings
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get deployment memory-hog -o jsonpath='{.spec.template.spec.containers[0].resources}' | jq .
 ----
@@ -187,14 +187,14 @@ Now let's deploy an application that needs to scale horizontally based on traffi
 
 === Deploy a Scalable Application
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc apply -f https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/demo-app.yaml
 ----
 
 Wait for it to be ready:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc rollout status deployment/demo-app --timeout=120s
 ----
@@ -203,14 +203,14 @@ oc rollout status deployment/demo-app --timeout=120s
 
 Configure automatic scaling when CPU exceeds 50%. Why 50%? Lower targets mean pods scale sooner (more responsive, higher cost). Higher targets pack pods tighter (saves resources, slower reaction). 50% is a common starting point - tune it based on your app's latency requirements.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc autoscale deployment demo-app --min=1 --max=5 --cpu-percent=50
 ----
 
 Check the HPA:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get hpa demo-app
 ----
@@ -230,7 +230,7 @@ TIP: You can view the HPA in the console at **Workloads > HorizontalPodAutoscale
 
 Open a second terminal or run this in the background:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc run load-generator --image=registry.access.redhat.com/ubi9/ubi-minimal --restart=Never -- /bin/sh -c "while true; do curl -s -o /dev/null http://demo-app:8080; done"
 ----
@@ -244,7 +244,7 @@ Then navigate to **Observe -> Dashboards**, select **Kubernetes / Compute Resour
 image::perf-hpa-pods-scaling.png[Pod list showing multiple demo-app pods after HPA scale-up, link=self, window=blank]
 You can also watch via CLI:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get hpa demo-app -w
 ----
@@ -253,14 +253,14 @@ Watch the `REPLICAS` column and `TARGETS` column. The HPA may have already scale
 
 Verify pods scaled:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -l app=demo-app
 ----
 
 === Stop the Load
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc delete pod load-generator
 ----
@@ -271,7 +271,7 @@ The HPA will scale back down after ~5 minutes of reduced load. This is the defau
 
 You've right-sized one app with VPA and auto-scaled another with HPA. Now look at the bigger picture:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc adm top nodes
 ----
@@ -287,7 +287,7 @@ This is how you'd answer the question in a capacity review: "Do we need more nod
 
 == Cleanup & Takeaways
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc delete project performance-demo
 ----

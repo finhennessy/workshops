@@ -18,7 +18,7 @@ OpenShift uses **OVN-Kubernetes** as its network plugin (the only supported opti
 
 === View Cluster Network Configuration
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get network.config cluster -o yaml
 ----
@@ -33,14 +33,14 @@ Key fields:
 
 === Verify Network Operator Health
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get clusteroperator network
 ----
 
 The network operator should show `AVAILABLE: True` and `DEGRADED: False`.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n openshift-ovn-kubernetes
 ----
@@ -53,7 +53,7 @@ By default, all pods can communicate with all other pods. **NetworkPolicy** rest
 
 === Create Test Projects
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 # Create two projects for testing network isolation
 oc new-project netpol-frontend
@@ -66,12 +66,12 @@ oc new-app --name=backend --image=registry.access.redhat.com/ubi9/httpd-24 -n ne
 
 Wait for pods in both namespaces:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n netpol-frontend
 ----
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n netpol-backend
 ----
@@ -82,7 +82,7 @@ Both pods should show `Running` before continuing.
 
 Test connectivity from frontend to backend:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 BACKEND_IP=$(oc get pod -n netpol-backend -l deployment=backend -o jsonpath='{.items[0].status.podIP}')
 oc exec -n netpol-frontend deployment/frontend -- curl -s --connect-timeout 5 http://${BACKEND_IP}:8080
@@ -92,7 +92,7 @@ Expected: HTML output from the app - connectivity works by default.
 
 === Apply Deny-All NetworkPolicy
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -n netpol-backend -f -
 apiVersion: networking.k8s.io/v1
@@ -111,7 +111,7 @@ Three lines do all the work: `podSelector: {}` targets every pod, `policyTypes: 
 
 === Test Connectivity Again (Should Fail)
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 BACKEND_IP=$(oc get pod -n netpol-backend -l deployment=backend -o jsonpath='{.items[0].status.podIP}')
 oc exec -n netpol-frontend deployment/frontend -- curl -s --connect-timeout 5 http://${BACKEND_IP}:8080
@@ -123,7 +123,7 @@ Expected: Connection times out (no output after 5 seconds). The NetworkPolicy bl
 
 Now punch a hole - allow only the frontend namespace to reach the backend, and only on port 8080:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 # First, label the frontend namespace so we can reference it
 oc label namespace netpol-frontend app-tier=frontend
@@ -155,7 +155,7 @@ This is precise: only pods labelled `deployment: backend`, only from namespaces 
 
 === Test Connectivity (Should Work Again)
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 BACKEND_IP=$(oc get pod -n netpol-backend -l deployment=backend -o jsonpath='{.items[0].status.podIP}')
 oc exec -n netpol-frontend deployment/frontend -- curl -s --connect-timeout 5 http://${BACKEND_IP}:8080
@@ -165,7 +165,7 @@ Expected: HTML output from the app - the allow policy takes effect.
 
 === View NetworkPolicies
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get networkpolicy -n netpol-backend
 ----
@@ -205,14 +205,14 @@ Standard NetworkPolicies are namespace-scoped - each team manages their own. **A
 
 View the available ANP API:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc api-resources | grep policy.networking
 ----
 
 Create a cluster-wide policy that blocks external DNS to a specific provider:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -f -
 apiVersion: policy.networking.k8s.io/v1alpha1
@@ -240,7 +240,7 @@ EOF
 
 Verify it was created:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get adminnetworkpolicy
 ----
@@ -249,7 +249,7 @@ The `PRIORITY` field determines evaluation order - lower numbers are evaluated f
 
 Now prove it works. Try resolving DNS via the blocked external server:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/04-network-security/test-dns.sh)
 ----
@@ -258,12 +258,12 @@ Expected: `DNS to 8.8.8.8: BLOCKED (timed out)`. The ANP blocked outbound traffi
 
 Clean up and verify DNS recovers:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc delete adminnetworkpolicy cluster-deny-external-dns
 ----
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/04-network-security/test-dns.sh)
 ----
@@ -284,7 +284,7 @@ EgressFirewall applies per-namespace and evaluates rules in order. Traffic not m
 
 View the API:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc explain egressfirewall.spec
 ----
@@ -293,7 +293,7 @@ oc explain egressfirewall.spec
 
 Block traffic to a specific CIDR (example: block 1.1.1.0/24):
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -n netpol-frontend -f -
 apiVersion: k8s.ovn.org/v1
@@ -315,7 +315,7 @@ This blocks egress to 1.1.1.0/24 but allows all other traffic.
 
 **Test EgressFirewall**
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 # This should fail (blocked)
 oc exec -n netpol-frontend deployment/frontend -- curl -s --connect-timeout 3 http://1.1.1.1 || echo "Blocked!"
@@ -326,7 +326,7 @@ oc exec -n netpol-frontend deployment/frontend -- curl -s --connect-timeout 3 -I
 
 **View EgressFirewall**
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get egressfirewall -n netpol-frontend -o yaml
 ----
@@ -335,7 +335,7 @@ oc get egressfirewall -n netpol-frontend -o yaml
 
 You can also use DNS names instead of IP addresses (OVN resolves them):
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 cat <<EOF | oc apply -n netpol-backend -f -
 apiVersion: k8s.ovn.org/v1
@@ -398,7 +398,7 @@ image::diagrams/04_egress_ip.png[OpenShift EgressIP Architecture, align=center, 
 
 **Understanding EgressIP**
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc explain egressip
 ----
@@ -413,7 +413,7 @@ EgressIP requires:
 
 You can check which nodes in a cluster are configured to host EgressIPs by querying for the required label.
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get nodes -l k8s.ovn.org/egress-assignable
 ----
@@ -477,7 +477,7 @@ Services are accessible at:
 
 Test DNS resolution from any pod:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc exec -n netpol-frontend deployment/frontend -- getent hosts backend.netpol-backend.svc.cluster.local
 ----
@@ -486,7 +486,7 @@ You should see the backend service's cluster IP followed by the hostname - this 
 
 === View Cluster DNS Configuration
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get dns cluster -o yaml
 ----
@@ -499,7 +499,7 @@ NOTE: On cloud platforms (AWS, Azure, GCP), you'll also see `publicZone` and `pr
 
 === View CoreDNS Pods
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get pods -n openshift-dns
 ----
@@ -508,7 +508,7 @@ CoreDNS provides DNS resolution for all pods in the cluster.
 
 == Cleanup & Summary
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 # Delete network policy test namespaces in the background
 oc delete namespace netpol-frontend netpol-backend --ignore-not-found --wait=false

@@ -62,3 +62,7 @@ asciidoc:
     module_enable_security: 'false'
     module_enable_ztwim: 'false'
     module_enable_vault: 'false'
+    # Console details
+    openshift_cluster_admin_username: 'admin'
+    openshift_cluster_admin_password: 'aWq9i2pBYneKpv6o'
+    openshift_cluster_console_url: 'https://console-openshift-console.apps.workshop.sandbox3998.opentlc.com'

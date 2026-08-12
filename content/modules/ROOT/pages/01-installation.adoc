@@ -22,7 +22,7 @@ TIP: Two things that **cannot be changed** after installation: the **pod network
 
 View all cluster operators:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get clusteroperators
 ----
@@ -78,7 +78,7 @@ image::installation-images/clusteroperators-console.png[ClusterOperators in web 
 
 View the current cluster version:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get clusterversion
 ----
@@ -91,7 +91,7 @@ version   4.20.x    True        False         3h      Cluster version is 4.20.x
 
 Check which update channel you're subscribed to:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get clusterversion version -o jsonpath='{.spec.channel}'
 ----
@@ -105,7 +105,7 @@ Common channels:
 
 View available updates:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc adm upgrade
 ----
@@ -128,7 +128,7 @@ Beyond the node health you explored in the Platform Overview, there's an importa
 
 **Check node configuration status:**
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get machineconfigpool
 ----
@@ -159,7 +159,7 @@ The green *Up to date* indicators and *Degraded: False* confirm that all node co
 
 Verify networking works by creating a test application and route:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc new-project install-test 2>/dev/null || oc project install-test
 oc new-app --name=test-app --image=registry.access.redhat.com/ubi9/httpd-24 -n install-test
@@ -167,7 +167,7 @@ oc new-app --name=test-app --image=registry.access.redhat.com/ubi9/httpd-24 -n i
 
 Wait for the pod to be running, then create a route:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc rollout status deployment/test-app -n install-test --timeout=60s
 oc create route edge test-app --service=test-app -n install-test
@@ -177,7 +177,7 @@ NOTE: This may take a minute to complete. Only press **Ctrl+C** if it has been r
 
 Test the route:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 curl -sk https://$(oc get route test-app -n install-test -o jsonpath='{.spec.host}') | head -3
 ----
@@ -188,7 +188,7 @@ TIP: You can also verify the route in the console at **Networking > Routes** (pr
 
 Clean up:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc delete project install-test &>/dev/null &
 ----
@@ -199,7 +199,7 @@ oc delete project install-test &>/dev/null &
 
 Verify dynamic storage works by creating a PVC and a pod that mounts it:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc new-project storage-test 2>/dev/null || oc project storage-test
 cat <<EOF | oc apply -n storage-test -f -
@@ -243,7 +243,7 @@ EOF
 
 Wait for the PVC to bind and the pod to start:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 echo "Waiting for storage test to complete..."
 ELAPSED=0
@@ -268,7 +268,7 @@ TIP: In the console, navigate to **Storage > PersistentVolumeClaims** (project: 
 
 Check the pod wrote to the volume successfully:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc logs test-storage -n storage-test
 ----
@@ -277,7 +277,7 @@ You should see `Storage works!` - confirming that dynamic provisioning, volume a
 
 Clean up:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc delete project storage-test &>/dev/null &
 ----
@@ -309,7 +309,7 @@ This shows the 99th percentile WAL fsync latency per etcd member. Values under 1
 
 Also verify the monitoring operator is healthy:
 
-[source,bash,role="execute"]
+[source,bash,role="copypaste"]
 ----
 oc get clusteroperator monitoring
 ----
