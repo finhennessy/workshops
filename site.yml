@@ -1,8 +1,8 @@
 ---
 site:
-  title: OpenShift Ops Day Roadshow
-  url: https://github.com/rhpds/openshift-days-ops-showroom
-  start_page: openshift-days-ops-track::index.adoc
+  title: OpenShift troubleshooting Workshop
+  url: https://github.com/finhennessy/workshops
+  start_page: openshift-troubleshooting-workshop::index.adoc
 
 content:
   sources:
