@@ -3,6 +3,8 @@ site:
   title: OpenShift Troubleshooting Workshop
   url: https://github.com/finhennessy/workshops
   start_page: openshift-troubleshooting-workshop::index.adoc
+  keys:
+    navbar_logo: openshift  
 
 content:
   sources:
@@ -11,7 +13,7 @@ content:
 
 ui:
   bundle:
-    url: https://github.com/jnewsome97/rhdp_showroom_theme_execute/releases/download/rh-one-2025-execute-v4/ui-bundle.zip
+    url: https://github.com/finhennessy/showroom_theme/releases/tag/v0.1.0/ui-bundle.zip
     snapshot: true
   supplemental_files:
     - path: ./content/supplemental-ui
