@@ -190,7 +190,7 @@ Deploy Mailpit - a lightweight mail server that catches emails and shows them in
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/deploy-mailpit.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/deploy-mailpit.sh)
 ----
 
 **Configure Alertmanager**
@@ -199,7 +199,7 @@ Now configure Alertmanager to send emails through Mailpit. This routes warning a
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/configure-alertmanager-email.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/configure-alertmanager-email.sh)
 ----
 
 The script will print the Mailpit inbox URL. Click it or copy it into your browser. Within a minute you should see alert emails arriving:
@@ -220,7 +220,7 @@ Reset Alertmanager to its default configuration and clean up:
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/restore-alertmanager.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/restore-alertmanager.sh)
 ----
 
 **Takeaway:** An alert that nobody receives is the same as no alert at all. Configuring receivers is one of the first things to do on a new cluster - without it, your monitoring is just decoration.
@@ -289,7 +289,7 @@ You've seen how OperatorHub works. The remaining operators use the same process 
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/install-operators.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/install-operators.sh)
 ----
 
 Verify all operators are installed:
@@ -331,7 +331,7 @@ Now extract the S3 credentials, create the CA cert ConfigMap, and deploy the Lok
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-loki-storage.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/setup-loki-storage.sh)
 ----
 
 === Set Up Log Collection
@@ -366,7 +366,7 @@ Create the ClusterLogForwarder - this defines the pipeline:
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-log-forwarding.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/setup-log-forwarding.sh)
 ----
 
 === Enable the Logging UI
@@ -499,7 +499,7 @@ The tracing pipeline needs two sets of permissions: the collector needs write ac
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-tracing-rbac.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/setup-tracing-rbac.sh)
 ----
 
 === Deploy the OpenTelemetry Collector
@@ -508,7 +508,7 @@ The collector is the central receiving station for trace data. Apps send traces 
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/09-observability/setup-otel-collector.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/09-observability/setup-otel-collector.sh)
 ----
 
 This collector:
@@ -602,7 +602,7 @@ Remove the observability resources you deployed. The Prometheus monitoring stack
 
 [source,bash,role="copypaste"]
 ----
-bash <(curl -sL https://raw.githubusercontent.com/rhpds/openshift-days-ops-showroom/main/support/cleanup-scripts/cleanup-observability.sh)
+bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/cleanup-scripts/cleanup-observability.sh)
 ----
 
 === Summary

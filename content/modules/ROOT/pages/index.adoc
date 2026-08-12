@@ -128,14 +128,11 @@ Your cluster is already running with monitoring, a container registry, ingress r
 
 The OpenShift Web Console provides a unified view of your entire cluster.
 
-image::ocp-console-overview.png[OpenShift Administrator Console Overview, link=self, window=blank]
-You can access the console in two ways:
+// image::ocp-console-overview.png[OpenShift Administrator Console Overview, link=self, window=blank]
+image::ocp-console-home.png[OpenShift Administrator Console Overview, link=self, window=blank]
 
-* **OCP Console tab** - Click the **OCP Console** tab at the top of this workshop. The console is embedded directly in the workshop interface so you can follow along without switching windows.
-* **Separate browser tab** - If you prefer a full-screen experience, you can open the console in a separate browser tab by clicking the URL:
+You can open the console in a separate browser tab by clicking the URL:
 {openshift_cluster_console_url}[window=blank]
-
-NOTE: ctrl + click on the URL to open URLs in a new tab.
 
 TIP: If you see an authentication error, click **Try Again** or reload the tab at the top and try again.
 
@@ -147,15 +144,17 @@ Administrator login credentials:
 | *Password:* | {openshift_cluster_admin_password}
 |===
 
-=== Step 2: Switch to Administrator Perspective
+// === Step 2: Switch to Administrator Perspective
 
-In the top-left corner of the console, you'll see a perspective switcher dropdown. Click the dropdown and select **Administrator**.
+// In the top-left corner of the console, you'll see a perspective switcher dropdown. Click the dropdown and select **Administrator**.
 
 === Step 3: Dashboard Overview
 
-Once in the Administrator perspective, you'll see the **Overview** dashboard under **Home → Overview**.
+// Once in the Administrator perspective, you'll see the **Overview** dashboard under **Home → Overview**.
+In the Core perspective, you'll see the **Overview** dashboard under **Home → Overview**.
 
-image::ocp-dashboard-overview.png[OpenShift Administrator Dashboard Overview, link=self, window=blank]
+// image::ocp-dashboard-overview.png[OpenShift Administrator Dashboard Overview, link=self, window=blank]
+image::ocp-console-home.png[OpenShift Administrator Dashboard Overview, link=self, window=blank]
 **Key sections to notice:**
 
 1. **Cluster Status** - Overall health at a glance
@@ -202,7 +201,8 @@ prometheus-operator-bb6c949f9-6rpnl                     2/2     Running   0     
    - Network I/O
    - Filesystem I/O
 
-image::observe-cluster-metrics-dashboard.png[Kubernetes Cluster Metrics Dashboard, link=self, window=blank]
+// image::observe-cluster-metrics-dashboard.png[Kubernetes Cluster Metrics Dashboard, link=self, window=blank]
+image::observe-cluster-metrics-dashboard-2.png[Kubernetes Cluster Metrics Dashboard, link=self, window=blank]
 **No configuration required.** This is built-in.
 
 **Query Prometheus (Advanced)**
@@ -355,7 +355,8 @@ However, look at the **Utilization graphs** below - actual CPU and memory usage 
 
 Active alerts, utilization graphs, and per-pod resource usage are all in one console view - no SSH to nodes required.
 
-image::nodes-console-view.png[Nodes Console View, link=self, window=blank]
+// image::nodes-console-view.png[Nodes Console View, link=self, window=blank]
+image::nodes-console-view-2.png[Nodes Console View, link=self, window=blank]
 === Infrastructure Management
 
 **MachineSets - Automated Infrastructure Scaling**
@@ -380,7 +381,8 @@ In a production cloud deployment, you'd see multiple MachineSets (one per availa
 
 You can see this in the console at **Compute -> MachineSets**:
 
-image::machinesets-console.png[MachineSets view showing worker MachineSet with 0 of 0 machines on compact cluster, link=self, window=blank]
+// image::machinesets-console.png[MachineSets view showing worker MachineSet with 0 of 0 machines on compact cluster, link=self, window=blank]
+image::machinesets-console-2.png[MachineSets view showing worker MachineSet with 0 of 0 machines on compact cluster, link=self, window=blank]
 In a production cluster, this view shows the machine count, instance type, CPU, and memory for each MachineSet - and you can scale directly from the console by editing the desired count.
 
 You can also view the machine resources:
@@ -396,17 +398,17 @@ This shows the underlying compute instances that OpenShift is managing.
 
 To add another worker node, simply scale the MachineSet:
 
-WARNING: Do not run this command - it is shown as an example only. This workshop environment does not have spare hosts available for scaling.
+// WARNING: Do not run this command - it is shown as an example only. This workshop environment does not have spare hosts available for scaling.
 
 [source,bash]
 ----
 # Example - scales a zone from 0 to 1 worker
-oc scale machineset.machine.openshift.io <machineset-name> --replicas=1 -n openshift-machine-api
+oc scale machineset.machine.openshift.io workshop-hg8v8-worker-ap-southeast-2a --replicas=1 -n openshift-machine-api
 ----
 
 OpenShift automatically provisions a compute instance, configures it, and joins it to the cluster - one command to scale your infrastructure.
 
-NOTE: This workshop environment runs on bare metal without spare hosts available, so scaling is shown as an example rather than a live exercise. On cloud platforms (AWS, Azure, GCP), the Machine API provisions new instances automatically.
+// NOTE: This workshop environment runs on bare metal without spare hosts available, so scaling is shown as an example rather than a live exercise. On cloud platforms (AWS, Azure, GCP), the Machine API provisions new instances automatically.
 
 === Over-the-Air Upgrades
 
@@ -428,14 +430,16 @@ version   4.x       True        False         32m     Cluster version is 4.x
 
 1. Navigate to **Administration → Cluster Settings**
 +
-image::cluster-settings-details.png[Cluster Settings Details Tab, link=self, window=blank]
+// image::cluster-settings-details.png[Cluster Settings Details Tab, link=self, window=blank]
+image::cluster-settings-details-2.png[Cluster Settings Details Tab, link=self, window=blank]
 +
 2. Click **Select a version** button (if available)
 3. See available upgrade paths
 
 NOTE: If your cluster shows **Update status: Up to date**, the **Select a version** button will not appear. This means your cluster is already running the latest available version in its update channel.
 
-image::cluster-upgrade-versions.png[Available Upgrade Versions,width=600, link=self, window=blank]
+// image::cluster-upgrade-versions.png[Available Upgrade Versions,width=600, link=self, window=blank]
+image::cluster-upgrade-versions-2.png[Available Upgrade Versions,width=600, link=self, window=blank]
 OpenShift handles upgrades automatically:
 
 - Rolling upgrades of control plane
@@ -468,7 +472,8 @@ Hundreds of operators ready to install - a mix of Red Hat, certified partner, an
 4. Filter by **Type** and select **Operators** to see the full list of available operators
 5. Feel free to click any operator tile to browse its details - this is just for exploration, no need to install anything
 
-image::software-catalog-operators.png[Software Catalog filtered to Operators showing available operator tiles, link=self, window=blank]
+// image::software-catalog-operators.png[Software Catalog filtered to Operators showing available operator tiles, link=self, window=blank]
+image::software-catalog-operators-2.png[Software Catalog filtered to Operators showing available operator tiles, link=self, window=blank]
 Browse the tiles, click into anything that looks interesting - this is your cluster, explore it.
 
 == What's Next
