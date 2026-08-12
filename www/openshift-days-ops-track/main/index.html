@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Setup &amp; Overview :: OpenShift Ops Day Roadshow</title>
+    <link rel="canonical" href="https://github.com/rhpds/openshift-days-ops-showroom/openshift-days-ops-track/main/index.html">
+    <link rel="next" href="01-installation.html">
+    <meta name="generator" content="Antora 3.1.15">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://demo.redhat.com" target="_blank" style="margin-left: 5%;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1508.5 178.739" style="width: 278px;"><g fill="#fff"><path d="M316.6 63.2v-56H342a21.279 21.279 0 0 1 7.8 1.3 18.111 18.111 0 0 1 5.9 3.5 15.577 15.577 0 0 1 5 11.8 15.051 15.051 0 0 1-3.1 9.5 16.836 16.836 0 0 1-8.4 5.8l12.5 24.1h-9.3l-11.6-23H325v23Zm24.7-48.6H325v18.7h16.3q5.25 0 8.1-2.7a8.7 8.7 0 0 0 2.8-6.6 8.7 8.7 0 0 0-2.8-6.6c-1.8-1.9-4.5-2.8-8.1-2.8ZM364.1 42.8a20.674 20.674 0 0 1 1.6-8.2 20.288 20.288 0 0 1 4.3-6.7 19.92 19.92 0 0 1 6.5-4.5 19.718 19.718 0 0 1 8-1.6 18.463 18.463 0 0 1 7.8 1.6 18.677 18.677 0 0 1 6.2 4.5 20.927 20.927 0 0 1 4.1 6.8 23.2 23.2 0 0 1 1.5 8.4v2.3H372a13.822 13.822 0 0 0 4.6 8.4 13.6 13.6 0 0 0 9.1 3.3 15.553 15.553 0 0 0 5.7-1 12.858 12.858 0 0 0 4.6-2.6l5.1 5a25.983 25.983 0 0 1-7.4 4.1 24.69 24.69 0 0 1-8.4 1.3 21.306 21.306 0 0 1-8.4-1.6 22.763 22.763 0 0 1-6.8-4.4 20.788 20.788 0 0 1-4.5-6.7 23.2 23.2 0 0 1-1.5-8.4Zm20.2-14.2a11.527 11.527 0 0 0-8 3 13.046 13.046 0 0 0-4.2 7.8h24.2a13.091 13.091 0 0 0-4.2-7.8 11.106 11.106 0 0 0-7.8-3ZM443.1 63.2v-3.8a19.448 19.448 0 0 1-5.8 3.3 18.924 18.924 0 0 1-6.7 1.2 19.824 19.824 0 0 1-14.6-6.1 22.268 22.268 0 0 1-4.4-6.7 21.812 21.812 0 0 1 0-16.4A20.534 20.534 0 0 1 416 28a19.335 19.335 0 0 1 6.6-4.5 20.334 20.334 0 0 1 8.2-1.6 20.7 20.7 0 0 1 6.6 1 19.415 19.415 0 0 1 5.7 3V7.2l8-1.8v57.8Zm-25.2-20.4a13.718 13.718 0 0 0 4 10.1 13.45 13.45 0 0 0 9.8 4.1 14.956 14.956 0 0 0 6.4-1.3 15.954 15.954 0 0 0 4.9-3.6V33.6a14.988 14.988 0 0 0-4.9-3.5 15.271 15.271 0 0 0-6.4-1.3 13.423 13.423 0 0 0-9.9 4 13.806 13.806 0 0 0-3.9 10ZM478.1 63.2v-56h8.4v24h29.8v-24h8.4v56h-8.4V38.8h-29.8v24.4ZM547.2 64a16.483 16.483 0 0 1-10.8-3.5 11.037 11.037 0 0 1-4.2-8.9 10.375 10.375 0 0 1 4.7-9.2 20.76 20.76 0 0 1 11.8-3.2 27.841 27.841 0 0 1 5.8.6 27.374 27.374 0 0 1 5.3 1.6v-4.3a8.143 8.143 0 0 0-2.6-6.5 11.452 11.452 0 0 0-7.4-2.2 20.788 20.788 0 0 0-6 .9 34.616 34.616 0 0 0-6.6 2.6l-3-6a54.169 54.169 0 0 1 8.4-3.1 33.18 33.18 0 0 1 8.3-1.1c5.2 0 9.3 1.3 12.2 3.8s4.4 6.1 4.4 10.8v27h-7.8v-3.5a19.441 19.441 0 0 1-5.8 3.2 23.54 23.54 0 0 1-6.7 1Zm-7.3-12.6a5.646 5.646 0 0 0 2.6 4.8 11.193 11.193 0 0 0 6.6 1.8 16.256 16.256 0 0 0 5.9-1 14.449 14.449 0 0 0 4.9-2.9V47a19.778 19.778 0 0 0-4.8-1.8 24.933 24.933 0 0 0-5.7-.6 11.859 11.859 0 0 0-6.8 1.8 5.728 5.728 0 0 0-2.7 5ZM580.6 53.2v-24H572v-6.7h8.6V12.1l7.9-1.9v12.3h12v6.7h-12v22.1a5.94 5.94 0 0 0 1.4 4.4c.9.9 2.5 1.3 4.6 1.3a23.637 23.637 0 0 0 3-.2 10.857 10.857 0 0 0 2.8-.8v6.7a19.28 19.28 0 0 1-3.8.9 27.484 27.484 0 0 1-3.8.3c-3.9 0-7-.9-9-2.8-2-1.7-3.1-4.4-3.1-7.9Z"></path></g><path d="M127 90.2c12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4L149.8 37c-1.7-7.1-3.2-10.3-15.7-16.6-9.7-5-30.8-13.1-37.1-13.1-5.8 0-7.5 7.5-14.4 7.5-6.7 0-11.6-5.6-17.9-5.6-6 0-9.9 4.1-12.9 12.5 0 0-8.4 23.7-9.5 27.2a4.216 4.216 0 0 0-.3 1.9c0 9.2 36.3 39.4 85 39.4Zm32.5-11.4c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3C21.8 58.8 0 61.8 0 81c0 31.5 74.6 70.3 133.7 70.3 45.3 0 56.7-20.5 56.7-36.6-.1-12.8-11-27.3-30.9-35.9Z" fill="#e00"></path><path d="M159.5 78.8c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3l3.7-9.1a4.877 4.877 0 0 0-.3 2c0 9.2 36.3 39.4 85 39.4 12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4Z"></path><path d="M253.5 158.7a2.22 2.22 0 0 1-2.2-2.2V2.2a2.2 2.2 0 0 1 4.4 0v154.2a2.242 2.242 0 0 1-2.2 2.3Z" fill="#fff"></path><text data-name="Demo Platform" transform="translate(1186 149)" fill="#fff" font-size="82" font-family="'RedHatDisplay', 'Overpass', overpass, helvetica, arial, sans-serif" font-weight="700"><tspan x="-877.892" y="0">Demo Platform</tspan></text></svg>
+      </a>
+      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="https://github.com/rhpds/openshift-days-ops-showroom">OpenShift Ops Day Roadshow</a>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item navbar-item-right-dropdown has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown navbar-dropdown-right">
+            <a class="navbar-item navbar-item-right-content" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.20" target="_blank">OpenShift Docs</a>
+            <a class="navbar-item navbar-item-right-content" href="https://access.redhat.com" target="_blank">Red Hat Customer Portal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-days-ops-track" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Ops Day Roadshow</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Setup &amp; Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="01-installation.html">Installation &amp; Verification</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="03-ingress-loadbalancing.html">Ingress &amp; Load Balancing</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="04-network-security.html">Network Security</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="05-debugging-troubleshooting.html">Debugging &amp; Troubleshooting</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="09-observability.html">Observability &amp; Logging</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="10-performance-tuning.html">Performance Tuning</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="99-conclusion.html">Wrap Up</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Ops Day Roadshow</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link is-current"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Ops Day Roadshow</a></li>
+    <li><a href="index.html">Setup &amp; Overview</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Setup &amp; Overview</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Duration:</strong> 15-20 minutes<br>
+<strong>Format:</strong> Hands-on demonstration</p>
+</div>
+<details>
+<summary class="title">Console Access</summary>
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Username:</strong> <code>{openshift_cluster_admin_username}</code></p>
+</li>
+<li>
+<p><strong>Password:</strong> <code>{openshift_cluster_admin_password}</code></p>
+</li>
+<li>
+<p><strong>Console:</strong> {openshift_cluster_console_url}[window=blank]</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+We recommend using the <strong>OCP Console</strong> tab within this Showroom interface as it is easier to follow along.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</details>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ops-day-banner.png" alt="OpenShift Ops Day" width="100%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_go"><a class="anchor" href="#_lets_go"></a>Let&#8217;s Go</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have cluster admin access to a live OpenShift cluster. Let&#8217;s make sure everything&#8217;s working - click the commands below:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see your admin user.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Three nodes, all <code>Ready</code>.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterversion</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That&#8217;s your cluster version and update channel. You&#8217;re in.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_this_workshop"><a class="anchor" href="#_about_this_workshop"></a>About This Workshop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every ops team hits the same wall with Kubernetes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The cluster is running, but who handles authentication?</p>
+</li>
+<li>
+<p>How do you back up a namespace someone accidentally deleted?</p>
+</li>
+<li>
+<p>What happens when pods crash at 2am and nobody knows where to look?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This workshop lets you answer those questions through hands-on exercises. You&#8217;ll break things and fix them, diagnose real failure modes, configure production security, and see what OpenShift looks like when things go wrong (and how fast you can recover).</p>
+</div>
+<div class="sect2">
+<h3 id="_your_workshop_interface"><a class="anchor" href="#_your_workshop_interface"></a>Your Workshop Interface</h3>
+<div class="paragraph">
+<p>Your workshop runs in a split-panel interface with the following panels:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Left panel</strong> - Instructions (what you&#8217;re reading now)</p>
+</li>
+<li>
+<p><strong>Right panel</strong> - Tabbed workspace with your cluster tools</p>
+</li>
+<li>
+<p><strong>Draggable divider</strong> - Drag the border between panels to resize</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/showroom-tabs.png" target="blank"><img src="_images/showroom-tabs.png" alt="Showroom interface showing tabs for OCP Console" width="Terminal" height="RHACS"></a>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tab</th>
+<th class="tableblock halign-left valign-top">What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>OCP Console</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The OpenShift web console - cluster management, monitoring dashboards, and troubleshooting.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Terminal</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A web-based terminal pre-connected to your cluster. Run <code>oc</code> commands directly - no local setup needed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>RHACS</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Red Hat Advanced Cluster Security - vulnerability scanning, compliance, and runtime security.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ArgoCD</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenShift GitOps - continuous delivery using GitOps principles.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Developer Hub</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Red Hat Developer Hub - developer portal with software catalogs and self-service templates.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Highlighted command blocks are <strong>clickable</strong> - they switch to the Terminal tab and execute automatically.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modules"><a class="anchor" href="#_modules"></a>Modules</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>This workshop is modular.</strong> Your session has a specific set of modules - only the ones in the <strong>navigation on the left</strong> are available. The full catalog covers:</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Area</th>
+<th class="tableblock halign-left valign-top">What you&#8217;ll do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Platform Fundamentals</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify cluster health, check etcd metrics, deploy an app and expose it in 30 seconds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Application Operations</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy workloads, break a readiness probe on purpose, scale with the Horizontal Pod Autoscaler (HPA) under real load, configure network policies</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Identity &amp; Access</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integrate LDAP and OIDC authentication, sync groups, test RBAC by logging in as different users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Day 2 Operations</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create alerting rules, set up logging, configure distributed tracing, right-size workloads with VPA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Advanced Capabilities</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a VM alongside containers and live-migrate it, manage multiple clusters with ACM, scan for vulnerabilities with ACS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Developer Productivity</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Register applications in Developer Hub, see how golden path templates replace ops tickets with self-service</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exploring_the_platform"><a class="anchor" href="#_exploring_the_platform"></a>Exploring the Platform</h2>
+<div class="sectionbody">
+<div class="imageblock text-center">
+<div class="content">
+<a class="image" href="_images/diagrams/01_platform_architecture.png" target="blank"><img src="_images/diagrams/01_platform_architecture.png" alt="OpenShift Platform Architecture"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Your cluster is already running with monitoring, a container registry, ingress routing, and a web console - all built in. Let&#8217;s see what&#8217;s there.</p>
+</div>
+<div class="sect2">
+<h3 id="_step_1_access_the_administrator_console"><a class="anchor" href="#_step_1_access_the_administrator_console"></a>Step 1: Access the Administrator Console</h3>
+<div class="paragraph">
+<p>The OpenShift Web Console provides a unified view of your entire cluster.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/ocp-console-overview.png" target="blank"><img src="_images/ocp-console-overview.png" alt="OpenShift Administrator Console Overview"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>You can access the console in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>OCP Console tab</strong> - Click the <strong>OCP Console</strong> tab at the top of this workshop. The console is embedded directly in the workshop interface so you can follow along without switching windows.</p>
+</li>
+<li>
+<p><strong>Separate browser tab</strong> - If you prefer a full-screen experience, you can open the console in a separate browser tab by clicking the URL:
+{openshift_cluster_console_url}[window=blank]</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ctrl + click on the URL to open URLs in a new tab.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you see an authentication error, click <strong>Try Again</strong> or reload the tab at the top and try again.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Administrator login credentials:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Username:</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{openshift_cluster_admin_username}</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Password:</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{openshift_cluster_admin_password}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_step_2_switch_to_administrator_perspective"><a class="anchor" href="#_step_2_switch_to_administrator_perspective"></a>Step 2: Switch to Administrator Perspective</h3>
+<div class="paragraph">
+<p>In the top-left corner of the console, you&#8217;ll see a perspective switcher dropdown. Click the dropdown and select <strong>Administrator</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_dashboard_overview"><a class="anchor" href="#_step_3_dashboard_overview"></a>Step 3: Dashboard Overview</h3>
+<div class="paragraph">
+<p>Once in the Administrator perspective, you&#8217;ll see the <strong>Overview</strong> dashboard under <strong>Home → Overview</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/ocp-dashboard-overview.png" target="blank"><img src="_images/ocp-dashboard-overview.png" alt="OpenShift Administrator Dashboard Overview"></a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Key sections to notice:</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Cluster Status</strong> - Overall health at a glance</p>
+</li>
+<li>
+<p><strong>Cluster Utilization</strong> - CPU, Memory, Storage metrics</p>
+</li>
+<li>
+<p><strong>Cluster Inventory</strong> - Node count, Pod count, etc.</p>
+</li>
+<li>
+<p><strong>Activity</strong> - Recent events and alerts</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This single dashboard gives you cluster health, utilisation, inventory, and recent events - all in one view, with no setup required.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_platform_capabilities"><a class="anchor" href="#_platform_capabilities"></a>Platform Capabilities</h2>
+<div class="sectionbody">
+<div class="imageblock text-center">
+<div class="content">
+<a class="image" href="_images/diagrams/01_control_plane.png" target="blank"><img src="_images/diagrams/01_control_plane.png" alt="Control Plane Responsibilities" width="300"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Everything below - monitoring, a container registry, and ingress routing - was running before anyone logged in. Let&#8217;s prove it.</p>
+</div>
+<div class="sect2">
+<h3 id="_monitoring"><a class="anchor" href="#_monitoring"></a>Monitoring</h3>
+<div class="paragraph">
+<p>Nobody installed Prometheus on this cluster. It&#8217;s already running.</p>
+</div>
+<div class="paragraph">
+<p><strong>Explore Prometheus (CLI)</strong></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n openshift-monitoring | grep prometheus</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see Prometheus pods already running (output truncated):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>prometheus-k8s-0                                        6/6     Running   0          55m
+prometheus-k8s-1                                        6/6     Running   0          55m
+prometheus-operator-admission-webhook-c9f987dd7-bld9f   1/1     Running   0          71m
+prometheus-operator-admission-webhook-c9f987dd7-h4jtc   1/1     Running   0          71m
+prometheus-operator-bb6c949f9-6rpnl                     2/2     Running   0          66m</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Access Metrics (Console)</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the Console, navigate to <strong>Observe → Dashboards</strong></p>
+</li>
+<li>
+<p>Click the dropdown labeled <strong>Dashboard</strong> (it may show "API Performance" by default)</p>
+</li>
+<li>
+<p>Select <strong>Kubernetes / Compute Resources / Cluster</strong> from the dropdown</p>
+</li>
+<li>
+<p>You&#8217;ll see real-time metrics:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU Utilisation</p>
+</li>
+<li>
+<p>Memory Utilisation</p>
+</li>
+<li>
+<p>Network I/O</p>
+</li>
+<li>
+<p>Filesystem I/O</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/observe-cluster-metrics-dashboard.png" target="blank"><img src="_images/observe-cluster-metrics-dashboard.png" alt="Kubernetes Cluster Metrics Dashboard"></a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>No configuration required.</strong> This is built-in.</p>
+</div>
+<div class="paragraph">
+<p><strong>Query Prometheus (Advanced)</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Observe → Metrics</strong></p>
+</li>
+<li>
+<p>Try this PromQL query:</p>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">sum(rate(container_cpu_usage_seconds_total[5m])) by (namespace)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Run Queries</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see CPU usage broken down by namespace. This is a useful way to see which namespaces are consuming the most CPU.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Look at which namespaces are consuming the most CPU. <code>openshift-monitoring</code> and <code>openshift-etcd</code> are usually at the top because they run the cluster&#8217;s own infrastructure.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>All of this was available the moment the cluster came up.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/prometheus-cpu-by-namespace-query.png" target="blank"><img src="_images/prometheus-cpu-by-namespace-query.png" alt="Prometheus Query Results - CPU by Namespace"></a>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_container_registry"><a class="anchor" href="#_container_registry"></a>Container Registry</h3>
+<div class="paragraph">
+<p>Did anyone set up an image registry? Let&#8217;s check:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n openshift-image-registry</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output (truncated):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                                               READY   STATUS    RESTARTS      AGE
+cluster-image-registry-operator-86c45576b9-v8j48   1/1     Running   1 (73m ago)   89m
+image-registry-5cd768f9b5-nnrx5                    1/1     Running   0             72m
+image-registry-5cd768f9b5-pcnqk                    1/1     Running   0             72m
+node-ca-2487m                                      1/1     Running   0             72m
+node-ca-5lh4f                                      1/1     Running   0             72m
+...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Already running - with authentication, HA replicas, and storage configured. Nobody installed it.</p>
+</div>
+<div class="paragraph">
+<p><strong>View Image Streams</strong></p>
+</div>
+<div class="paragraph">
+<p>Image streams are OpenShift&#8217;s way of pointing to container images without hardcoding registry URLs. When an image updates, your builds and deployments can automatically pick up the change.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get imagestreams -n openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see pre-loaded builder images (output truncated):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                   IMAGE REPOSITORY                                                     TAGS
+cli                    image-registry.openshift-image-registry.svc:5000/openshift/cli      latest
+dotnet                 image-registry.openshift-image-registry.svc:5000/openshift/dotnet   6.0,8.0,9.0,6.0-ubi8,8.0-ubi8,9.0-ubi8...
+nodejs                 image-registry.openshift-image-registry.svc:5000/openshift/nodejs   20-minimal-ubi8,20-minimal-ubi9,20-ubi8...
+python                 image-registry.openshift-image-registry.svc:5000/openshift/python   3.11-ubi8,3.11-ubi9,3.12-minimal-ubi10...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These are <strong>ready to use</strong> - no Docker Hub rate limits, no external dependencies.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_routing"><a class="anchor" href="#_routing"></a>Routing</h3>
+<div class="paragraph">
+<p>Same story with ingress - it&#8217;s already there. Check it:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get routes -A | head -10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see Routes (OpenShift&#8217;s ingress abstraction - output truncated):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAMESPACE                  NAME                  HOST/PORT
+open-cluster-management    acm-cli-downloads     acm-cli-downloads.apps.cluster...
+openshift-authentication   oauth-openshift       oauth-openshift.apps.cluster...
+openshift-console          console               console-openshift-console.apps.cluster...
+openshift-console          downloads             downloads-openshift-console.apps.cluster...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Routes give you HAProxy-based ingress with automatic TLS certs and DNS. OpenShift also supports standard Kubernetes <code>Ingress</code> resources if you prefer.</p>
+</div>
+<div class="paragraph">
+<p><strong>Try It: Deploy and Expose in 30 Seconds</strong></p>
+</div>
+<div class="paragraph">
+<p>How fast can you go from nothing to a running app with a public URL? Three commands:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project quick-demo
+oc new-app --name=hello --image=registry.access.redhat.com/ubi9/httpd-24
+oc create route edge hello --service=hello</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Get the URL and test it:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -sk https://$(oc get route hello -n quick-demo -o jsonpath='{.spec.host}') | head -3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the httpd test page HTML. That&#8217;s a deployed app, with a service, a TLS-terminated route, and automatic DNS - in three commands.</p>
+</div>
+<div class="paragraph">
+<p>Clean up (runs in the background so we can move on):</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc delete project quick-demo &amp;&gt;/dev/null &amp;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cluster_management"><a class="anchor" href="#_cluster_management"></a>Cluster Management</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_nodes"><a class="anchor" href="#_nodes"></a>Nodes</h3>
+<div class="paragraph">
+<p>Let&#8217;s look at what you&#8217;re running on:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your environment uses a <strong>compact cluster</strong> - 3 nodes that serve as both control plane and worker:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                            STATUS   ROLES                         AGE   VERSION
+control-plane-cluster-xxxxx-1   Ready    control-plane,master,worker   20h   v1.33.6
+control-plane-cluster-xxxxx-2   Ready    control-plane,master,worker   20h   v1.33.6
+control-plane-cluster-xxxxx-3   Ready    control-plane,master,worker   20h   v1.33.6</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Node names and count vary by deployment. Production clusters typically have separate control plane and worker nodes. This workshop uses a compact topology where all nodes serve both roles.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Check Node Details (Console)</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Compute → Nodes</strong></p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/compute-nodes-menu.png" target="blank"><img src="_images/compute-nodes-menu.png" alt="Compute menu showing Nodes option"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Click on any node</p>
+</li>
+<li>
+<p>The <strong>Overview</strong> tab immediately shows you:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Status</strong> - shows whether the node is healthy and flags any issues. On this workshop cluster you&#8217;ll see overcommit warnings for CPU and memory - this means pod <strong>limits</strong> exceed the node&#8217;s capacity, but that doesn&#8217;t mean the node is in trouble. Check the <strong>Utilization</strong> section below to see actual usage vs available capacity. If actual usage is well within capacity, the overcommit is fine. You&#8217;ll also see firing alerts - on a workshop cluster with many operators installed, this is expected.</p>
+<div class="paragraph">
+<p>However, look at the <strong>Utilization graphs</strong> below - actual CPU and memory usage is well within capacity. The difference is important: <strong>requests</strong> (what&#8217;s guaranteed) fit on the node, <strong>limits</strong> (what pods are allowed to burst to) don&#8217;t. In practice, all pods bursting at once rarely happens, especially in a workshop environment. In production, you&#8217;d either right-size your limits, add nodes, or accept the overcommit if your workloads don&#8217;t burst together.</p>
+</div>
+</li>
+<li>
+<p><strong>Utilization graphs</strong> - CPU, Memory, Filesystem, and Network over time. Compare "available" to actual usage - that tells you the real capacity story, not the theoretical limits.</p>
+</li>
+<li>
+<p><strong>Pod count</strong> - how many pods are running on this node.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click the <strong>Pods</strong> tab to see every pod on that node with its CPU and memory usage.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Active alerts, utilization graphs, and per-pod resource usage are all in one console view - no SSH to nodes required.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/nodes-console-view.png" target="blank"><img src="_images/nodes-console-view.png" alt="Nodes Console View"></a>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure_management"><a class="anchor" href="#_infrastructure_management"></a>Infrastructure Management</h3>
+<div class="paragraph">
+<p><strong>MachineSets - Automated Infrastructure Scaling</strong></p>
+</div>
+<div class="paragraph">
+<p>OpenShift uses <strong>MachineSets</strong> to automate infrastructure scaling. On cloud platforms (AWS, Azure, GCP), MachineSets manage worker nodes across availability zones - you can scale up by changing a replica count rather than manually provisioning machines.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When ACM is installed, <code>machinesets</code> exists in two API groups (Cluster API and OpenShift Machine API). We use the full resource name <code>machinesets.machine.openshift.io</code> to target OpenShift&#8217;s Machine API.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machinesets.machine.openshift.io -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your compact cluster has a single MachineSet scaled to 0 - all 3 nodes serve as both control plane and worker, so no separate worker machines are needed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                           DESIRED   CURRENT   READY   AVAILABLE   AGE
+cluster-xxxxx-worker-0         0         0                             20h</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In a production cloud deployment, you&#8217;d see multiple MachineSets (one per availability zone) with active worker replicas that can be scaled up or down.</p>
+</div>
+<div class="paragraph">
+<p>You can see this in the console at <strong>Compute &#8594; MachineSets</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/machinesets-console.png" target="blank"><img src="_images/machinesets-console.png" alt="MachineSets view showing worker MachineSet with 0 of 0 machines on compact cluster"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>In a production cluster, this view shows the machine count, instance type, CPU, and memory for each MachineSet - and you can scale directly from the console by editing the desired count.</p>
+</div>
+<div class="paragraph">
+<p>You can also view the machine resources:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machines.machine.openshift.io -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows the underlying compute instances that OpenShift is managing.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scaling_workers"><a class="anchor" href="#_scaling_workers"></a>Scaling Workers</h3>
+<div class="paragraph">
+<p>To add another worker node, simply scale the MachineSet:</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Do not run this command - it is shown as an example only. This workshop environment does not have spare hosts available for scaling.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Example - scales a zone from 0 to 1 worker
+oc scale machineset.machine.openshift.io &lt;machineset-name&gt; --replicas=1 -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>OpenShift automatically provisions a compute instance, configures it, and joins it to the cluster - one command to scale your infrastructure.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This workshop environment runs on bare metal without spare hosts available, so scaling is shown as an example rather than a live exercise. On cloud platforms (AWS, Azure, GCP), the Machine API provisions new instances automatically.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_over_the_air_upgrades"><a class="anchor" href="#_over_the_air_upgrades"></a>Over-the-Air Upgrades</h3>
+<div class="paragraph">
+<p>Check the cluster version:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterversion</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
+version   4.x       True        False         32m     Cluster version is 4.x</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>View Available Upgrades (Console)</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Administration → Cluster Settings</strong></p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/cluster-settings-details.png" target="blank"><img src="_images/cluster-settings-details.png" alt="Cluster Settings Details Tab"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Select a version</strong> button (if available)</p>
+</li>
+<li>
+<p>See available upgrade paths</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If your cluster shows <strong>Update status: Up to date</strong>, the <strong>Select a version</strong> button will not appear. This means your cluster is already running the latest available version in its update channel.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/cluster-upgrade-versions.png" target="blank"><img src="_images/cluster-upgrade-versions.png" alt="Available Upgrade Versions" width="600"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>OpenShift handles upgrades automatically:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Rolling upgrades of control plane</p>
+</li>
+<li>
+<p>Automated worker node updates</p>
+</li>
+<li>
+<p>Zero-downtime upgrades</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_operator_ecosystem"><a class="anchor" href="#_operator_ecosystem"></a>Operator Ecosystem</h3>
+<div class="paragraph">
+<p>Need to add something to the cluster? See how many operators are available right now:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get packagemanifests -n openshift-marketplace | wc -l</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hundreds of operators ready to install - a mix of Red Hat, certified partner, and community options.</p>
+</div>
+<div class="paragraph">
+<p><strong>Explore Software Catalog (Console)</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Ecosystem → Software Catalog</strong></p>
+</li>
+<li>
+<p>You may need to select a project from the dropdown - if one is not already selected, choose <strong>default</strong></p>
+</li>
+<li>
+<p>You&#8217;ll see the unified software catalog with categories on the left:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>AI/Machine Learning</strong> - Red Hat OpenShift AI, Open Data Hub</p>
+</li>
+<li>
+<p><strong>CI/CD</strong> - Red Hat OpenShift GitOps, Red Hat OpenShift Pipelines</p>
+</li>
+<li>
+<p><strong>Database</strong> - Red Hat AMQ Streams (Kafka)</p>
+</li>
+<li>
+<p><strong>Security</strong> - Red Hat Advanced Cluster Security</p>
+</li>
+<li>
+<p><strong>Storage</strong> - Red Hat OpenShift Data Foundation</p>
+</li>
+<li>
+<p><strong>Integration &amp; Delivery</strong> - Red Hat Integration, Red Hat Service Mesh, Red Hat Serverless</p>
+</li>
+<li>
+<p>And many more&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Filter by <strong>Type</strong> and select <strong>Operators</strong> to see the full list of available operators</p>
+</li>
+<li>
+<p>Feel free to click any operator tile to browse its details - this is just for exploration, no need to install anything</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/software-catalog-operators.png" target="blank"><img src="_images/software-catalog-operators.png" alt="Software Catalog filtered to Operators showing available operator tiles"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Browse the tiles, click into anything that looks interesting - this is your cluster, explore it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_whats_next"><a class="anchor" href="#_whats_next"></a>What&#8217;s Next</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve seen what&#8217;s running out of the box - monitoring, registry, routing, node management, upgrades, and a catalog of operators ready to install. None of it required setup.</p>
+</div>
+<div class="paragraph">
+<p>The rest of this workshop goes deeper. Select the next module from the navigation to start working with it hands-on.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="next"><a href="01-installation.html" class="query-params-link">Installation &amp; Verification</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="1">
+  <div class="toc-menu"></div>
+</aside>  </div>
+</main>
+</div>
+<footer class="footer">
+  <a href="https://demo.redhat.com" target="_blank" class="poweredBy"><p>Powered by</p><div class="labInfo_poweredBy" style="display: block; width: 260px;"><svg class="labInfo_poweredByLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1508.5 178.739"><g fill="#111"><path d="M316.6 63.2v-56H342a21.279 21.279 0 0 1 7.8 1.3 18.111 18.111 0 0 1 5.9 3.5 15.577 15.577 0 0 1 5 11.8 15.051 15.051 0 0 1-3.1 9.5 16.836 16.836 0 0 1-8.4 5.8l12.5 24.1h-9.3l-11.6-23H325v23Zm24.7-48.6H325v18.7h16.3q5.25 0 8.1-2.7a8.7 8.7 0 0 0 2.8-6.6 8.7 8.7 0 0 0-2.8-6.6c-1.8-1.9-4.5-2.8-8.1-2.8ZM364.1 42.8a20.674 20.674 0 0 1 1.6-8.2 20.288 20.288 0 0 1 4.3-6.7 19.92 19.92 0 0 1 6.5-4.5 19.718 19.718 0 0 1 8-1.6 18.463 18.463 0 0 1 7.8 1.6 18.677 18.677 0 0 1 6.2 4.5 20.927 20.927 0 0 1 4.1 6.8 23.2 23.2 0 0 1 1.5 8.4v2.3H372a13.822 13.822 0 0 0 4.6 8.4 13.6 13.6 0 0 0 9.1 3.3 15.553 15.553 0 0 0 5.7-1 12.858 12.858 0 0 0 4.6-2.6l5.1 5a25.983 25.983 0 0 1-7.4 4.1 24.69 24.69 0 0 1-8.4 1.3 21.306 21.306 0 0 1-8.4-1.6 22.763 22.763 0 0 1-6.8-4.4 20.788 20.788 0 0 1-4.5-6.7 23.2 23.2 0 0 1-1.5-8.4Zm20.2-14.2a11.527 11.527 0 0 0-8 3 13.046 13.046 0 0 0-4.2 7.8h24.2a13.091 13.091 0 0 0-4.2-7.8 11.106 11.106 0 0 0-7.8-3ZM443.1 63.2v-3.8a19.448 19.448 0 0 1-5.8 3.3 18.924 18.924 0 0 1-6.7 1.2 19.824 19.824 0 0 1-14.6-6.1 22.268 22.268 0 0 1-4.4-6.7 21.812 21.812 0 0 1 0-16.4A20.534 20.534 0 0 1 416 28a19.335 19.335 0 0 1 6.6-4.5 20.334 20.334 0 0 1 8.2-1.6 20.7 20.7 0 0 1 6.6 1 19.415 19.415 0 0 1 5.7 3V7.2l8-1.8v57.8Zm-25.2-20.4a13.718 13.718 0 0 0 4 10.1 13.45 13.45 0 0 0 9.8 4.1 14.956 14.956 0 0 0 6.4-1.3 15.954 15.954 0 0 0 4.9-3.6V33.6a14.988 14.988 0 0 0-4.9-3.5 15.271 15.271 0 0 0-6.4-1.3 13.423 13.423 0 0 0-9.9 4 13.806 13.806 0 0 0-3.9 10ZM478.1 63.2v-56h8.4v24h29.8v-24h8.4v56h-8.4V38.8h-29.8v24.4ZM547.2 64a16.483 16.483 0 0 1-10.8-3.5 11.037 11.037 0 0 1-4.2-8.9 10.375 10.375 0 0 1 4.7-9.2 20.76 20.76 0 0 1 11.8-3.2 27.841 27.841 0 0 1 5.8.6 27.374 27.374 0 0 1 5.3 1.6v-4.3a8.143 8.143 0 0 0-2.6-6.5 11.452 11.452 0 0 0-7.4-2.2 20.788 20.788 0 0 0-6 .9 34.616 34.616 0 0 0-6.6 2.6l-3-6a54.169 54.169 0 0 1 8.4-3.1 33.18 33.18 0 0 1 8.3-1.1c5.2 0 9.3 1.3 12.2 3.8s4.4 6.1 4.4 10.8v27h-7.8v-3.5a19.441 19.441 0 0 1-5.8 3.2 23.54 23.54 0 0 1-6.7 1Zm-7.3-12.6a5.646 5.646 0 0 0 2.6 4.8 11.193 11.193 0 0 0 6.6 1.8 16.256 16.256 0 0 0 5.9-1 14.449 14.449 0 0 0 4.9-2.9V47a19.778 19.778 0 0 0-4.8-1.8 24.933 24.933 0 0 0-5.7-.6 11.859 11.859 0 0 0-6.8 1.8 5.728 5.728 0 0 0-2.7 5ZM580.6 53.2v-24H572v-6.7h8.6V12.1l7.9-1.9v12.3h12v6.7h-12v22.1a5.94 5.94 0 0 0 1.4 4.4c.9.9 2.5 1.3 4.6 1.3a23.637 23.637 0 0 0 3-.2 10.857 10.857 0 0 0 2.8-.8v6.7a19.28 19.28 0 0 1-3.8.9 27.484 27.484 0 0 1-3.8.3c-3.9 0-7-.9-9-2.8-2-1.7-3.1-4.4-3.1-7.9Z"></path></g><path d="M127 90.2c12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4L149.8 37c-1.7-7.1-3.2-10.3-15.7-16.6-9.7-5-30.8-13.1-37.1-13.1-5.8 0-7.5 7.5-14.4 7.5-6.7 0-11.6-5.6-17.9-5.6-6 0-9.9 4.1-12.9 12.5 0 0-8.4 23.7-9.5 27.2a4.216 4.216 0 0 0-.3 1.9c0 9.2 36.3 39.4 85 39.4Zm32.5-11.4c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3C21.8 58.8 0 61.8 0 81c0 31.5 74.6 70.3 133.7 70.3 45.3 0 56.7-20.5 56.7-36.6-.1-12.8-11-27.3-30.9-35.9Z" fill="#e00"></path><path d="M159.5 78.8c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3l3.7-9.1a4.877 4.877 0 0 0-.3 2c0 9.2 36.3 39.4 85 39.4 12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4Z"></path><path d="M253.5 158.7a2.22 2.22 0 0 1-2.2-2.2V2.2a2.2 2.2 0 0 1 4.4 0v154.2a2.242 2.242 0 0 1-2.2 2.3Z" fill="#111"></path><text data-name="Demo Platform" transform="translate(1186 149)" fill="#111" font-size="82" font-family="'RedHatDisplay', 'Overpass', overpass, helvetica, arial, sans-serif" font-weight="700"><tspan x="-877.892" y="0">Demo Platform</tspan></text></svg></div></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
