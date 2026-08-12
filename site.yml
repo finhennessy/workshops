@@ -13,7 +13,7 @@ content:
 
 ui:
   bundle:
-    url: https://github.com/finhennessy/showroom_theme/releases/tag/v0.1.0/ui-bundle.zip
+    url: https://github.com/finhennessy/showroom_theme/releases/download/v0.1.0/ui-bundle.zip
     snapshot: true
   supplemental_files:
     - path: ./content/supplemental-ui
