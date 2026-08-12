@@ -1,6 +1,6 @@
 ---
 site:
-  title: OpenShift troubleshooting Workshop
+  title: OpenShift Troubleshooting Workshop
   url: https://github.com/finhennessy/workshops
   start_page: openshift-troubleshooting-workshop::index.adoc
 
