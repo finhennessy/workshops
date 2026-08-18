@@ -45,7 +45,14 @@ oc describe deployment <deployment-name> -n <namespace>
 
 First, create the namespace and deploy the intentionally broken applications:
 
-[source,bash,role="execute"]
+// Replace the X with your ID, e.g. for admin2 user, use debug-lab-2.
+
+// [source,bash,role="copypaste"]
+// ----
+// oc new-project debug-lab-X
+// ----
+
+[source,bash,role="copypaste"]
 ----
 bash <(curl -sL https://raw.githubusercontent.com/finhennessy/workshops/main/support/05-debugging/deploy-broken-apps.sh)
 ----
