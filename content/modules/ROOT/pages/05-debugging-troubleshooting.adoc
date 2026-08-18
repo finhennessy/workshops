@@ -528,6 +528,6 @@ The pattern is always the same: **check status → describe pod/replicaset → r
 
 [source,bash,role="copypaste"]
 ----
-oc delete namespace debug-lab-USER --ignore-not-found --wait=false
+oc delete namespace $(oc project -q) --ignore-not-found --wait=false
 echo "Cleanup running in background - you can continue to the next module"
 ----
