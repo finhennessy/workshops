@@ -226,7 +226,7 @@ A `LimitRange` in the namespace caps containers at 2Gi memory, but the deploymen
 
 [source,bash,role="copypaste"]
 ----
-oc get deployment weather-cache  -o jsonpath='{.spec.template.spec.containers[0].resources}' | python3 -m json.tool
+oc get deployment weather-cache  -o jsonpath='{.spec.template.spec.containers[0].resources}' | jq
 ----
 
 [source,bash,role="copypaste"]
@@ -273,7 +273,7 @@ The deployment references a ConfigMap that doesn't exist:
 
 [source,bash,role="copypaste"]
 ----
-oc get deployment weather-backend -o jsonpath='{.spec.template.spec.containers[0].envFrom}' | python3 -m json.tool
+oc get deployment weather-backend -o jsonpath='{.spec.template.spec.containers[0].envFrom}' | jq
 ----
 
 **Fix**
@@ -341,7 +341,7 @@ Compare the service selector with the pod labels:
 
 [source,bash,role="copypaste"]
 ----
-echo "=== Service selector ===" && oc get svc weather-proxy -o jsonpath='{.spec.selector}' | python3 -m json.tool && echo "=== Pod labels ===" && oc get pod -l app=weather-proxy  -o jsonpath='{.items[0].metadata.labels}' | python3 -m json.tool
+echo "=== Service selector ===" && oc get svc weather-proxy -o jsonpath='{.spec.selector}' | jq && echo "=== Pod labels ===" && oc get pod -l app=weather-proxy  -o jsonpath='{.items[0].metadata.labels}' | jq
 ----
 
 Spot the difference? The service selector says `weather-proxi` (typo) but the pod label is `weather-proxy`.
