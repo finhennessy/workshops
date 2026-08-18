@@ -284,7 +284,7 @@ Create the missing ConfigMap with the keys the app expects:
 ----
 oc create configmap weather-config \
   --from-literal=API_ENDPOINT="http://weather-api:8080" \
-  --from-literal=CACHE_TTL="300" \
+  --from-literal=CACHE_TTL="300" 
 ----
 
 TIP: You can verify the ConfigMap in the console at **Workloads > ConfigMaps** (project: `debug-lab-USER`) - click `weather-config` to see its keys and values.
