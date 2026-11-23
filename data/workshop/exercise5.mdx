@@ -103,12 +103,12 @@ You should see a new violation: **Unauthorized Process Execution** for the `paym
 
 Locking baselines one deployment at a time through the web console is fine for a targeted change, but ACME has hundreds of deployments. Morgan wants every workload in the `payment-gateway` namespace locked down before end of day.
 
-Fortunately, RHACS exposes a full [REST API](https://central-stackrox.apps.workshop.sandbox1614.opentlc.com/main/apidocs) that we can use to automate this. The API includes a [bulk lock endpoint](https://github.com/stackrox/stackrox/blob/master/proto/api/v1/process_baseline_service.proto) that can lock all process baselines for a given cluster and namespace in a single call.
+Fortunately, RHACS exposes a full [REST API](https://central-stackrox.apps.workshop.sandbox2873.opentlc.com/main/apidocs) that we can use to automate this. The API includes a [bulk lock endpoint](https://github.com/stackrox/stackrox/blob/master/proto/api/v1/process_baseline_service.proto) that can lock all process baselines for a given cluster and namespace in a single call.
 
 First, generate an API token in the RHACS web console:
 
 1. Navigate to **Platform Configuration** → **Integrations**
-2. Scroll down to **Authentication Tokens** and click **API Token**
+2. Click on the **Authentication** tab and click **API Token**
 3. Click **Generate Token**, give it a name like `baseline-automation`, and select the `Admin` role
 4. Copy the generated token
 
@@ -116,7 +116,7 @@ Now set your environment variables:
 
 ```bash
 export ROX_API_TOKEN="<your-token-here>"
-export ROX_CENTRAL_ADDRESS="central-stackrox.apps.workshop.sandbox1614.opentlc.com:443"
+export ROX_CENTRAL_ADDRESS="central-stackrox.apps.workshop.sandbox2873.opentlc.com:443"
 ```
 
 We need the cluster ID for the bulk lock request. Retrieve it with:
