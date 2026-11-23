@@ -149,7 +149,7 @@ oc --namespace $NAMESPACE exec deploy/socketio-server -- rm -f /tmp/evidence/pwn
 Now let's address the exploit directly. Apply the hardened Socket.IO server deployment, which uses the Red Hat Hardened Images distroless Python image:
 
 ```bash
-curl --silent --fail --location "https://raw.githubusercontent.com/finhennessy/workshops/refs/heads/main/workshop/files/socketio-server-hardened.yaml" \
+curl --silent --fail --location "https://raw.githubusercontent.com/finhennessy/workshops/refs/heads/main/data/workshop/setup/socketio-server-hardened.yaml" \
   | sed "s/\${SUFFIX}/${SUFFIX}/g; s/\${NAMESPACE}/${NAMESPACE}/g" \
   | oc apply --filename -
 ```
